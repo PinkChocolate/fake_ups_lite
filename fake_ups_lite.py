@@ -50,8 +50,8 @@ class UPS:
     def charging(self):
         try:
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(0x0c, GPIO.IN)
-            return '+' if GPIO.input(0x0c) == GPIO.HIGH else '-'
+            GPIO.setup(0x02, GPIO.IN)
+            return '+' if GPIO.input(0x02) == GPIO.HIGH else '-'
         except:
             return '-'
 
