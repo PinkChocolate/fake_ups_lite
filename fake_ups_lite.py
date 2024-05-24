@@ -32,7 +32,7 @@ class UPS:
     def voltage(self):
         try:
             address = 0x32
-            read = self._bus.read_word_data(address,0x03)
+            read = self._bus.read_word_data(address, 3)
             swapped = struct.unpack("<H", struct.pack(">H", read))[0]
             return swapped * 1.25 / 1000 / 16
         except:
@@ -41,7 +41,7 @@ class UPS:
     def capacity(self):
         try:
             address = 0x32
-            read = self._bus.read_word_data(address, 0x0c)
+            read = self._bus.read_word_data(address, 0x02)
             swapped = struct.unpack("<H", struct.pack(">H", read))[0]
             return swapped / 256
         except:
@@ -50,8 +50,8 @@ class UPS:
     def charging(self):
         try:
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(0x09, GPIO.IN)
-            return '+' if GPIO.input(0x09) == GPIO.HIGH else '-'
+            GPIO.setup(0x0c, GPIO.IN)
+            return '+' if GPIO.input(0x0c) == GPIO.HIGH else '-'
         except:
             return '-'
 
@@ -60,7 +60,7 @@ class UPSLite(plugins.Plugin):
     __author__ = 'evilsocket@gmail.com'
     __version__ = '1.0.0'
     __license__ = 'GPL3'
-    __description__ = 'A plugin that will add a voltage indicator for the UPS Lite v1.1'
+    __description__ = 'Test Plugin for the fake UPS Lite from MJ'
 
     def __init__(self):
         self.ups = None
