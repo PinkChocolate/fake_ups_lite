@@ -41,7 +41,7 @@ class UPS:
     def capacity(self):
         try:
             address = 0x32
-            read = self._bus.read_word_data(address, 0x02)
+            read = self._bus.read_word_data(address, 0x0c)
             swapped = struct.unpack("<H", struct.pack(">H", read))[0]
             return swapped / 256
         except:
