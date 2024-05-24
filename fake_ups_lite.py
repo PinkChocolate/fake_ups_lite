@@ -32,7 +32,7 @@ class UPS:
     def voltage(self):
         try:
             address = 0x32
-            read = self._bus.read_word_data(address, 3)
+            read = self._bus.read_word_data(address, 0x03)
             swapped = struct.unpack("<H", struct.pack(">H", read))[0]
             return swapped * 1.25 / 1000 / 16
         except:
